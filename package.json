@@ -2,9 +2,9 @@
   "name": "kaka-bff",
   "version": "1.0.0",
   "description": "node bff",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "cross-env NODE_ENV=development nodemon  index.js"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,16 @@
   "homepage": "https://github.com/gaothing/kaka-bff#readme",
   "dependencies": {
     "chalk": "^5.2.0",
+    "cross-env": "^7.0.3",
+    "ioredis": "^5.3.1",
     "koa": "^2.14.1",
+    "koa-json": "^2.0.2",
+    "koa-static": "^5.0.0",
     "mysql2": "^3.2.0",
     "nodemon": "^2.0.21",
-    "sequelize": "^6.29.3"
+    "redis": "^4.6.5",
+    "sequelize": "^6.29.3",
+    "socket.io": "^4.6.1",
+    "ts-node": "^10.9.1"
   }
 }
