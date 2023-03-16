@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <div style="width:400px;margin: auto;">
+    <h1>登录页面</h1>
+    <p>账号：<input id="username" type="text"></p>
+    <p>密码：<input id="password" type="password"></p>
+    <p>
+      <button id="login">登录</button>
+    </p>
+  </div>
+</body>
+
+</html>
+<script>
+  document.getElementById('login').addEventListener('click', async () => {
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    const res = await fetch('/api/user/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    }).then(res => {
+      return res.json()
+    }).then(res => {
+      (res.code == 1000) && (window.location.href = '/api/view/index');
+    })
+
+    // 
+  })
+</script>

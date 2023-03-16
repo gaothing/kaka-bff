@@ -1,20 +1,32 @@
 import Koa from "koa";
 import chalk from "chalk";
-import json from "koa-json";
+// import json from "koa-json";
 import koaStatic from "koa-static";
 import koaDirRouter from "./middleware/koa-dir-router/index.js";
 import config from "./config/index.js";
 import redis from "./middleware/redis/index.js";
-const app = new Koa();
-// console.log(redis)
-app.use(redis(app));
-app.use(koaStatic("."));
+import formatBody from './middleware/format-body/index.js';
+import { koaBody } from 'koa-body';
+import views from 'koa-views'
+import { resBody } from './response/index.js';
+import {redisConfig} from './config/redis.js'
 
+const app = new Koa();
+app.use(views('./view', {
+  extension:'ejs'
+}))
+app.use(koaBody({
+  multipart: true,
+  formidable: {
+    maxFieldsSize: 200 * 1024 * 1024
+  }
+}));
+app.use(formatBody(resBody));
+app.use(redis(redisConfig));
+app.use(koaStatic("."));
 app.use(koaDirRouter("./api"));
-app.use(json({pretty: false, param: "pretty"}));
-app.use((ctx) => {
-  // console.log(ctx.body);
-});
+// app.use(json({pretty: false, param: "pretty"}));
+
 
 app.listen(config.port, () => {
   console.log(

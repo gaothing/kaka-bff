@@ -1,4 +1,3 @@
-import { resBody } from '../../response/index.js';
 import { getOderSq } from "../../sequelize/order.js";
 export default {
   method: 'post',
@@ -10,6 +9,6 @@ export default {
       orderName,
       total
     });
-    ctx.body = resBody(1000, order);
+    ctx.body = ctx.formatBody(1000, order);
   }
 }

@@ -1,16 +1,15 @@
-import { resBody } from '../../response/index.js';
 import { getUserSq } from "../../sequelize/user.js";
+/**
+ * 登录
+ */
 export default {
   method: 'post',
   handler: async (ctx) => {
     const { username, password } = ctx.request.body;
+    console.log({ username, password })
     const userSq = await getUserSq();
-    const [user, created] = await userSq.findOrCreate({
-      where: { username},
-      defaults: {
-        password
-      }
-    });
-    ctx.body = resBody(1000, user);
+    const [isRegister] = await userSq.findAll({ where: { username, password }, attributes: ['id', 'username', 'updatedAt'] });
+    ctx.redis.set('loginStatus',username)
+    ctx.body =isRegister?ctx.formatBody(1000, isRegister): ctx.formatBody(1001);
   }
 }
