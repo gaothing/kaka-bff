@@ -1,6 +1,6 @@
 import Koa from "koa";
 import chalk from "chalk";
-// import json from "koa-json";
+import json from "koa-json";
 import koaStatic from "koa-static";
 import koaDirRouter from "./middleware/koa-dir-router/index.js";
 import config from "./config/index.js";
@@ -9,7 +9,8 @@ import formatBody from './middleware/format-body/index.js';
 import { koaBody } from 'koa-body';
 import views from 'koa-views'
 import { resBody } from './response/index.js';
-import {redisConfig} from './config/redis.js'
+import { redisConfig } from './config/redis.js'
+import easyMonitor from 'easy-monitor';
 
 const app = new Koa();
 app.use(views('./view', {
@@ -24,11 +25,12 @@ app.use(koaBody({
 app.use(formatBody(resBody));
 app.use(redis(redisConfig));
 app.use(koaStatic("."));
-app.use(koaDirRouter("./api"));
-// app.use(json({pretty: false, param: "pretty"}));
+app.use(koaDirRouter("./api",false));
+app.use(json({pretty: false, param: "pretty"}));
 
 
 app.listen(config.port, () => {
+  easyMonitor('KAKA');
   console.log(
     chalk.green.bold(`
 KKKKKKKKK    KKKKKKK               AAA               KKKKKKKKK    KKKKKKK               AAA               
