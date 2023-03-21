@@ -9,6 +9,6 @@ export default [
     code: 1003,
     message: 'account has exits'
   }, {
-    code: 40002,
-    message: 'params error'
+    code: 4000,
+    message: '404'
   }];

@@ -7,7 +7,8 @@ export default {
   handler: async (ctx) => {
     const name = ctx.query.name;
     const path = `public/upload/${name}`;
-    ctx.attachment(path);
+    const ret = ctx.attachment(path);
+    console.log(ret)
     await send(ctx, path);
 
   }
