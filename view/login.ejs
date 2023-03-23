@@ -22,9 +22,10 @@
 </html>
 <script>
   document.getElementById('login').addEventListener('click', async () => {
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-    const res = await fetch('/api/user/login', {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    console.log('jj')
+    const res = await fetch('/user/login', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
@@ -36,7 +37,7 @@
     }).then(res => {
       return res.json()
     }).then(res => {
-      (res.code == 1000) && (window.location.href = '/api/view/index');
+      (res.code == 1000) && (window.location.href = '/view/index');
     })
 
     // 

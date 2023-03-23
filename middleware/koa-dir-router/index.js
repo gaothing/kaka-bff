@@ -26,18 +26,25 @@ export default (url,isInclude=false) => {
     return await next();
   };
 };
-function getData(ctx) {
-  return new Promise(function (resolve, reject) {
-    try {
-      let str = "";
-      ctx.req.on("data", function (chunk) {
-        str += chunk;
-      });
-      ctx.req.on("end", function (chunk) {
-        resolve(str);
-      });
-    } catch (err) {
-      reject(err);
-    }
-  });
+async function getData(ctx) {
+  let str = "";
+  for await (const chunk of ctx.req) {
+    str += chunk;
+  }
+  return str;
 }
+// function getData(ctx) {
+//   return new Promise(function (resolve, reject) {
+//     try {
+//       let str = "";
+//       ctx.req.on("data", function (chunk) {
+//         str += chunk;
+//       });
+//       ctx.req.on("end", function (chunk) {
+//         resolve(str);
+//       });
+//     } catch (err) {
+//       reject(err);
+//     }
+//   });
+// }

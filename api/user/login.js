@@ -5,6 +5,7 @@ import { getUserSq } from "../../sequelize/user.js";
 export default {
   method: 'post',
   handler: async (ctx) => {
+    console.log('login')
     const { username, password } = ctx.request.body;
     console.log({ username, password })
     const userSq = await getUserSq();

@@ -5,8 +5,8 @@
 export default {
   method: 'get',
   handler: async (ctx) => {
-    const redisUsername = ctx.redis.get('loginStatus');
-    redisUsername && ctx.redirect('/view/index');
+    // const redisUsername = ctx.redis.get('loginStatus');
+    // redisUsername && ctx.redirect('/view/index');
    await ctx.render('login', {
       title:'登录页'
     })
