@@ -6,7 +6,7 @@ export default {
   handler: async (ctx) => {
 
    await ctx.render('index', {
-      title:'首页'
+      title:'订单列表'
     })
   }
 }

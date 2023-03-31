@@ -1,6 +1,6 @@
 # kaka-bff
 
-该项目是一个node项目，集成文件路由、redis、mysql、sequelize、页面模版、https、http2等
+该项目是一个node项目，集成文件路由、redis、mysql、sequelize、页面模版、https、http2、jwt等
 
 ## http2和https的node服务器的搭建
 
@@ -38,3 +38,14 @@ openssl win32(64)下载：http://slproweb.com/products/Win32OpenSSL.html
 打开你的浏览器，访问 http://localhost:12333 ，即可看到进程界面
 
 关于定制化开发、通用配置项以及如何动态更新配置项详见官方文档
+### jwt 鉴权
+
+## 启动项目
+```
+//安装依赖
+pnpm i
+//启动项目
+pnpm run dev
+```
+
+访问：[https://localhost:4300/view/login](https:localhost:4300/view/login)

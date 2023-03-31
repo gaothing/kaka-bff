@@ -5,7 +5,7 @@ import { koaBody } from 'koa-body';
 import views from 'koa-views'
 import http2 from "http2";
 import fs from 'fs'
-import http2Options from './config/http2/index.js'
+// import http2Options from './config/http2/index.js'
 import koaDirRouter from "./middleware/koa-dir-router/index.js";
 import config from "./config/index.js";
 import listenCallback from "./config/log/listen.js";
@@ -13,12 +13,13 @@ import redis from "./middleware/redis/index.js";
 import formatBody from './middleware/format-body/index.js';
 import { resBody } from './response/index.js';
 import { redisConfig } from './config/redis.js'
-
+import jwt from 'koa-jwt'
 
 const app = new Koa();
 app.use(views('./view', {
   extension:'ejs'
 }))
+app.use(jwt({ secret: 'your_secret_key' }).unless({ path: ['/view/login','/user/login','/view/index'] }));
 app.use(koaBody({
   multipart: true,
   formidable: {

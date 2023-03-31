@@ -10,8 +10,28 @@
 </head>
 
 <body>
-  这是首页
+  <h1>订单列表</h1>
+  <ul id="box"></ul>
 
 </body>
 
 </html>
+<script>
+  async function getOrderList() {
+    const token = localStorage.getItem('token');
+    await fetch('/order/list?uid=1', {
+      method: 'get',
+      headers: {
+        'authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+    }).then(res => {
+      return res.json()
+    }).then(res => {
+      document.getElementById('box').innerHTML = res.data.map(item =>
+        `<li>${item.orderName}  价格：${item.total}</li>`)
+      console.log(res)
+    })
+  }
+  getOrderList()
+</script>
